@@ -1,5 +1,27 @@
 replicaCount: 1
 
+ingress:
+  # enabled -- Enables getting access to the application from the internet
+  enabled: true
+  # annotations -- Used with cert-manager to trigger cm-acme pods (certificate resolvers)
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/auth-realm: Authentication Required - 1Password
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    nginx.ingress.kubernetes.io/auth-type: basic
+  hosts:
+    - host: dagit.inarix.com
+      serviceName: dagster-dagit
+      path: /
+    - host: viewer.dagit.inarix.com
+      serviceName: dagster-dagit-read-only
+      path: /
+  tls: 
+    - hosts:
+        - dagit.inarix.com
+      secretName: dagit-inarix-tls
+
 image:
   repository: qdrant/qdrant
   pullPolicy: IfNotPresent
