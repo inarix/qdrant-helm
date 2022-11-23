@@ -1,21 +1,29 @@
 replicaCount: 1
 
+
 ingress:
   # enabled -- Enables getting access to the application from the internet
   enabled: true
   # annotations -- Used with cert-manager to trigger cm-acme pods (certificate resolvers)
+  whitelistSourceRange:
+    - 188.241.83.164/32
+    - 13.248.181.17/32
+    - 76.223.72.159/32
+    - 34.91.147.201/32
+    - 34.90.4.156/32
+    - 34.90.217.196/32
+    - 35.204.48.189/32
+    - 34.91.200.36/32
+    - 34.141.165.198/32
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/auth-realm: Authentication Required - 1Password
-    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    nginx.ingress.kubernetes.io/auth-realm: Qdrant requires basic authentication
+    nginx.ingress.kubernetes.io/auth-secret: qdrant-auth
     nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/whitelist-source-range: 188.241.83.164/32,13.248.181.17/32,76.223.72.159/32,34.91.147.201/32,34.90.4.156/32,34.90.217.196/32,35.204.48.189/32,34.91.200.36/32,34.141.165.198/32
   hosts:
-    - host: dagit.inarix.com
-      serviceName: dagster-dagit
-      path: /
-    - host: viewer.dagit.inarix.com
-      serviceName: dagster-dagit-read-only
+    - host: qdrant.serving.inarix.fr
+      serviceName: qdrant
       path: /
   tls: 
     - hosts:
