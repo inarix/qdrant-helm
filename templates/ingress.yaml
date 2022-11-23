@@ -15,7 +15,7 @@ spec:
     {{- range .Values.ingress.hosts }}
     - hosts:
         - {{ .host }}
-      secretName: {{ .host | replace "." "-" }}-tls
+      secretName: qdrant-tls
     {{- end }}
   {{- end }}
   rules:

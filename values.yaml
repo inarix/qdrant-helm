@@ -16,6 +16,7 @@ ingress:
     - 34.91.200.36/32
     - 34.141.165.198/32
   annotations:
+    kubernetes.io/tls-acme: 'true'
     nginx.ingress.kubernetes.io/auth-realm: Qdrant requires basic authentication
     nginx.ingress.kubernetes.io/auth-secret: qdrant-auth
     nginx.ingress.kubernetes.io/auth-type: basic
