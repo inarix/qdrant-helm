@@ -113,7 +113,9 @@ spec:
         {{- end }}
 
   volumeClaimTemplates:
-    - metadata:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
         name: qdrant-storage
         labels:
           app: {{ template "qdrant.name" . }}
