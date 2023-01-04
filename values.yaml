@@ -85,7 +85,7 @@ affinity: {}
 persistence:
   accessModes: [ "ReadWriteOnce" ]  
   size: 30Gi
-  #storageClassName: local-path
+  storageClassName: premium-rwo
 
 #only supported for single node qdrant clusters.
 snapshotRestoration:
